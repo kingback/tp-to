@@ -8,73 +8,44 @@
 
 Fast open website, like the [Town Port Scroll](https://dota2.fandom.com/wiki/Town_Portal_Scroll) and [Teleport](https://dota2.fandom.com/wiki/Teleport) abilities in DOTA2.
 
-## install
+## Install
 
 ```bash
 $ npm i tp-to -g # npm
 $ yarn global add tp-to # yarn
 ```
 
-## usage
+## Usage
 
 ### Get started
 
+#### Basic
+
 ```bash
 # add website
-$ tp add npm # npm
-$ tp add gh # github
-$ tp add gh -p=kingback # github profile
+$ tp add gh # https://github.com/
+$ tp add npm # https://www.npmjs.com/
+$ tp add npm -d # https://docs.npmjs.com/
 
 # open website
-$ tp npm
-$ tp gh
-$ tp gh -p
-$ tp gh -p tj #
+$ tp gh # https://github.com/
+$ tp npm # https://www.npmjs.com/
+$ tp npm -d # https://docs.npmjs.com/
+```
+
+#### Placeholder
+
+```bash
+# add website
+$ tp add npm -p # https://www.npmjs.com/package/{p}
+$ tp add npm -s # https://www.npmjs.com/search?q={s}
+$ tp add gh -p=kingback # https://github.com/{p}，set default value: kingback
+
+# open website
+$ tp npm -p lodash # https://www.npmjs.com/package/lodash
+$ tp npm -s react # https://www.npmjs.com/search?q=react
+$ tp gh -p # https://github.com/kingback，use default value: kingback
+$ tp gh -p tj # https://github.com/tj
 ```
 
 ### Advanced config（TODO）
-
-Open Config UI
-
-```bash
-$ tp config
-```
-
-Update config.json and save.
-
-```json
-{
-  "env": {
-    "git": {
-      ""
-    }
-  },
-  "websites": {
-    "gh": {
-      "urls": [
-        "https://github.com",
-        "https://github.com/$${git.group}/$${git.name}",
-        ["https://github.com/${o}", {
-          "p": "kingback",
-          "a": true
-        }]
-      ],
-      "env": {
-        "git": {
-          "group": "kingback"
-        }
-      }
-    }
-    "pub": {
-      "urls": [
-        "http://prod.pub.com",
-        ["http://st.pub.com", { "st": true }],
-        ["http://test.pub.com", { "t": true }],
-        ["http://dev.pub.com", { "d": true }]
-      ]
-    }
-  }
-}
-```
-
-Save.

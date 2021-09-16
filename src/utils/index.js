@@ -13,6 +13,10 @@ function noop(s) {
   return s;
 }
 
+function true2empty(v) {
+  return v !== true && v || '';
+}
+
 function log(method, color, ...args) {
   return console[method].apply(
     console,
@@ -81,7 +85,7 @@ async function addConfig({ options = {}, command, url, write }) {
   return config;
 }
 
-async function getOpenUrl(command, options) {
+async function getOpenUrl(command, options = {}) {
   const config = await readConfig();
   const commandConfigs = config.dests[command] || [];
   
@@ -91,10 +95,15 @@ async function getOpenUrl(command, options) {
     return keys.length === cKeys.length && keys.every(k => cKeys.includes(k));
   });
 
-  return cfg ? pupa(cfg.url, {
-    ...cfg.options,
-    ...options
-  }): false;
+  if (cfg) {
+    const merged = {};
+    Object.entries(cfg.options).forEach((o) => {
+      merged[o[0]] = true2empty(options[o[0]]) || true2empty(o[1]);
+    });
+    return pupa(cfg.url, merged);
+  }
+
+  return '';
 }
 
 module.exports = {

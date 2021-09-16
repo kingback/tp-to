@@ -2,6 +2,14 @@ const pupa = require('pupa');
 const inquirer = require('inquirer');
 const { addConfig, logger } = require('./utils');
 
+function tpl(url, options) {
+  const parsed = {};
+  Object.entries(options).forEach(o => {
+    parsed[o[0]] = o[1] === true ? `{${o[0]}}` : o[1];
+  });
+  return pupa(url, parsed);
+}
+
 module.exports = async function(cmd, options, _) {
   const command = _[1];
   
@@ -13,7 +21,7 @@ module.exports = async function(cmd, options, _) {
     name: 'confirm',
     default: true,
     message(answers) {
-      return `Confirm adding "${pupa(answers.url, options)}"?`
+      return `Confirm adding "${tpl(answers.url, options)}"?`
     }
   }]);
 
