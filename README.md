@@ -6,33 +6,75 @@
 [![License](https://img.shields.io/npm/l/tp-to.svg?sanitize=true)](https://github.com/kingback/tp-to)
 [![Create by](https://img.shields.io/badge/by-kingback-green)](https://github.com/kingback)
 
-Fast open website, like the Town Port Scroll and Teleport abilities in DOTA2.
+Fast open website, like the [Town Port Scroll](https://dota2.fandom.com/wiki/Town_Portal_Scroll) and [Teleport](https://dota2.fandom.com/wiki/Teleport) abilities in DOTA2.
+
+## install
+
+```bash
+$ npm i tp-to -g # npm
+$ yarn global add tp-to # yarn
+```
 
 ## usage
 
-### generate github release token
-
-First [generate github token](https://github.com/settings/tokens/new)(`public_repo` is all you need)，then exports it in `.bashrc/.zshrc`(remember to restart your `bash/zsh`)
-
-![](https://gw.alicdn.com/tfs/TB11BzS2FT7gK0jSZFpXXaTkpXa-2034-1020.png)
-
-```
-export CONVENTIONAL_GITHUB_RELEASER_TOKEN="your_token"
-```
-
-**Never ever expose your token in your repo**
-
-### bind travis & coveralls
-
-* [travis-cli](https://travis-ci.com/)
-* [coveralls](https://coveralls.io/)
-
-### commands
+### Get started
 
 ```bash
-$ npm run build # build
-$ npm run eslint # lint codes
-$ npm run push # add & commit & push codes
-$ npm run release:beta # release beta version
-$ npm run release # release production version
+# add website
+$ tp add npm # npm
+$ tp add gh # github
+$ tp add gh -p=kingback # github profile
+
+# open website
+$ tp npm
+$ tp gh
+$ tp gh -p
+$ tp gh -p tj #
 ```
+
+### Advanced config（TODO）
+
+Open Config UI
+
+```bash
+$ tp config
+```
+
+Update config.json and save.
+
+```json
+{
+  "env": {
+    "git": {
+      ""
+    }
+  },
+  "websites": {
+    "gh": {
+      "urls": [
+        "https://github.com",
+        "https://github.com/$${git.group}/$${git.name}",
+        ["https://github.com/${o}", {
+          "p": "kingback",
+          "a": true
+        }]
+      ],
+      "env": {
+        "git": {
+          "group": "kingback"
+        }
+      }
+    }
+    "pub": {
+      "urls": [
+        "http://prod.pub.com",
+        ["http://st.pub.com", { "st": true }],
+        ["http://test.pub.com", { "t": true }],
+        ["http://dev.pub.com", { "d": true }]
+      ]
+    }
+  }
+}
+```
+
+Save.
