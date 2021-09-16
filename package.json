@@ -1,7 +1,7 @@
 {
   "name": "tp-to",
   "description": "Fast open website, like the Town Port Scroll and Teleport abilities in DOTA2.",
-  "version": "1.1.0-beta.2",
+  "version": "1.1.0",
   "main": "lib/index.js",
   "module": "esm/index.js",
   "bin": {
